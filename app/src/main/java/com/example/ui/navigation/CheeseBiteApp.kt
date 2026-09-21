@@ -1,5 +1,6 @@
 package com.example.ui.navigation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -19,15 +20,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.model.FoodItem
 import com.example.ui.components.AppHeader
 import com.example.ui.components.CheeseBiteBottomNav
+import com.example.ui.components.ReviewSuccessNotification
 import com.example.ui.components.StickyCartBar
 import com.example.ui.screens.CartScreen
 import com.example.ui.screens.CategoriesScreen
+import com.example.ui.screens.ChatbotScreen
 import com.example.ui.screens.CheckoutScreen
 import com.example.ui.screens.FavoritesScreen
 import com.example.ui.screens.FoodDetailScreen
@@ -60,19 +64,29 @@ sealed class Screen(val route: String) {
     object OrderTracking : Screen("order_tracking")
     object Favorites : Screen("favorites")
     object Notifications : Screen("notifications")
+    object Chatbot : Screen("chatbot")
 }
 
 @Composable
 fun CheeseBiteApp(
-    viewModel: CheeseBiteViewModel = viewModel()
+    viewModel: CheeseBiteViewModel = viewModel(),
+    initialScreen: Screen = Screen.Splash
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
-    var currentScreen by remember { mutableStateOf<Screen>(Screen.Splash) }
+    var currentScreen by remember { mutableStateOf<Screen>(initialScreen) }
     var selectedFoodItem by remember { mutableStateOf<FoodItem?>(null) }
     var trackingOrderId by remember { mutableStateOf<String?>(null) }
+    var justPlacedOrderId by remember { mutableStateOf<String?>(null) }
+
+    // Android system Back button handling:
+    // Rule 1: If user is on ANY screen other than Home, navigate to Home and keep app open.
+    // Rule 2: If user is on Home, BackHandler is disabled, allowing standard Android app exit.
+    BackHandler(enabled = currentScreen != Screen.Home) {
+        currentScreen = Screen.Home
+    }
 
     // Listen to snackbars
     LaunchedEffect(Unit) {
@@ -155,14 +169,19 @@ fun CheeseBiteApp(
                             },
                             onNavigateToSearch = { currentScreen = Screen.Search },
                             onNavigateToCategories = { currentScreen = Screen.Menu },
-                            onNavigateToRestaurant = { currentScreen = Screen.RestaurantDetails }
+                            onNavigateToRestaurant = { currentScreen = Screen.RestaurantDetails },
+                            onNavigateToChatbot = { currentScreen = Screen.Chatbot }
                         )
                     }
                     Screen.Menu -> {
                         CategoriesScreen(
                             viewModel = viewModel,
                             onCategorySelected = { categoryId ->
-                                currentScreen = Screen.Home
+                                // category is selected in viewModel
+                            },
+                            onNavigateToFoodDetail = { item ->
+                                selectedFoodItem = item
+                                currentScreen = Screen.FoodDetail
                             },
                             onBackClick = { currentScreen = Screen.Home }
                         )
@@ -171,7 +190,7 @@ fun CheeseBiteApp(
                         CartScreen(
                             viewModel = viewModel,
                             onNavigateToCheckout = { currentScreen = Screen.Checkout },
-                            onExploreMenuClick = { currentScreen = Screen.Home }
+                            onExploreMenuClick = { currentScreen = Screen.Menu }
                         )
                     }
                     Screen.Orders -> {
@@ -181,7 +200,7 @@ fun CheeseBiteApp(
                                 trackingOrderId = orderId
                                 currentScreen = Screen.OrderTracking
                             },
-                            onExploreMenuClick = { currentScreen = Screen.Home }
+                            onExploreMenuClick = { currentScreen = Screen.Menu }
                         )
                     }
                     Screen.Profile -> {
@@ -189,7 +208,8 @@ fun CheeseBiteApp(
                             viewModel = viewModel,
                             onNavigateToFavorites = { currentScreen = Screen.Favorites },
                             onNavigateToOrders = { currentScreen = Screen.Orders },
-                            onNavigateToRestaurant = { currentScreen = Screen.RestaurantDetails }
+                            onNavigateToRestaurant = { currentScreen = Screen.RestaurantDetails },
+                            onNavigateToChatbot = { currentScreen = Screen.Chatbot }
                         )
                     }
                     Screen.Search -> {
@@ -227,6 +247,7 @@ fun CheeseBiteApp(
                             onBackClick = { currentScreen = Screen.Cart },
                             onOrderSuccess = { orderId ->
                                 trackingOrderId = orderId
+                                justPlacedOrderId = orderId
                                 currentScreen = Screen.OrderTracking
                             }
                         )
@@ -236,7 +257,8 @@ fun CheeseBiteApp(
                             orderId = trackingOrderId,
                             viewModel = viewModel,
                             onBackClick = { currentScreen = Screen.Home },
-                            onExploreMenuClick = { currentScreen = Screen.Home }
+                            onExploreMenuClick = { currentScreen = Screen.Home },
+                            showSuccessConfirmation = (justPlacedOrderId != null && justPlacedOrderId == trackingOrderId)
                         )
                     }
                     Screen.Favorites -> {
@@ -257,6 +279,11 @@ fun CheeseBiteApp(
                             onExploreMenuClick = { currentScreen = Screen.Home }
                         )
                     }
+                    Screen.Chatbot -> {
+                        ChatbotScreen(
+                            onBackClick = { currentScreen = Screen.Home }
+                        )
+                    }
                 }
 
                 // Sticky Cart Bar (floating above bottom navigation)
@@ -268,6 +295,16 @@ fun CheeseBiteApp(
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
+
+                // Polished Review Success Notification (floating above bottom navigation)
+                ReviewSuccessNotification(
+                    visible = uiState.isReviewSuccessNotificationVisible,
+                    eventId = uiState.reviewSuccessEventId,
+                    onDismiss = { viewModel.dismissReviewSuccessNotification() },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = if (showStickyCart) 72.dp else 12.dp)
+                )
             }
         }
     }

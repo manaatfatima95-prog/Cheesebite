@@ -56,6 +56,7 @@ import androidx.compose.ui.unit.sp
 import com.example.R
 import com.example.model.CartItem
 import com.example.ui.components.EmptyStateView
+import com.example.ui.components.FoodItemThumbnail
 import com.example.ui.components.PrimaryButton
 import com.example.ui.components.QuantitySelector
 import com.example.ui.theme.CheeseGoldPrimary
@@ -399,11 +400,8 @@ fun CartItemRow(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val imageRes = cartItem.foodItem.imageRes ?: R.drawable.food_special_pizza
-            Image(
-                painter = painterResource(id = imageRes),
-                contentDescription = cartItem.foodItem.name,
-                contentScale = ContentScale.Crop,
+            FoodItemThumbnail(
+                foodItem = cartItem.foodItem,
                 modifier = Modifier
                     .size(70.dp)
                     .clip(RoundedCornerShape(10.dp))

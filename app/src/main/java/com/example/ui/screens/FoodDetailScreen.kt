@@ -60,6 +60,7 @@ import com.example.R
 import com.example.model.FoodAddOn
 import com.example.model.FoodItem
 import com.example.model.FoodSize
+import com.example.ui.components.FoodItemThumbnail
 import com.example.ui.components.PrimaryButton
 import com.example.ui.components.QuantitySelector
 import com.example.ui.theme.CheeseGoldPrimary
@@ -102,11 +103,8 @@ fun FoodDetailScreen(
                     .fillMaxWidth()
                     .height(280.dp)
             ) {
-                val imageRes = foodItem.imageRes ?: R.drawable.food_special_pizza
-                Image(
-                    painter = painterResource(id = imageRes),
-                    contentDescription = foodItem.name,
-                    contentScale = ContentScale.Crop,
+                FoodItemThumbnail(
+                    foodItem = foodItem,
                     modifier = Modifier.matchParentSize()
                 )
 

@@ -41,6 +41,8 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.example.ui.components.branding.CheeseBiteSymbol
+import com.example.ui.theme.BrandCharcoalDark
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -79,7 +81,7 @@ fun RestaurantDetailsScreen(
     var selectedCategoryIndex by remember { mutableIntStateOf(0) }
 
     val activeCategory = uiState.categories.getOrNull(selectedCategoryIndex) ?: uiState.categories.first()
-    val itemsForCategory = uiState.allFoodItems.filter { it.category == activeCategory.id }
+    val itemsForCategory = viewModel.getItemsForCategory(activeCategory.id)
 
     LazyColumn(
         modifier = modifier
@@ -141,17 +143,14 @@ fun RestaurantDetailsScreen(
                     Box(
                         modifier = Modifier
                             .size(56.dp)
-                            .clip(CircleShape)
-                            .background(Color.White)
-                            .padding(2.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(BrandCharcoalDark)
+                            .padding(6.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_cheese_bite_logo),
-                            contentDescription = "Logo",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .clip(CircleShape)
+                        CheeseBiteSymbol(
+                            size = 44.dp,
+                            badgeShape = false
                         )
                     }
 
@@ -159,10 +158,10 @@ fun RestaurantDetailsScreen(
 
                     Column {
                         Text(
-                            text = "Cheese Bites Restaurant",
+                            text = "Chesee Bite Resturent",
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.ExtraBold,
-                                fontSize = 22.sp
+                                fontSize = 21.sp
                             ),
                             color = Color.White
                         )

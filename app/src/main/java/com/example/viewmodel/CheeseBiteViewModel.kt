@@ -27,7 +27,7 @@ import java.util.UUID
 data class CheeseBiteUiState(
     val categories: List<FoodCategory> = CheeseBiteRepository.categories,
     val allFoodItems: List<FoodItem> = CheeseBiteRepository.foodItems,
-    val selectedCategoryId: String = "deals",
+    val selectedCategoryId: String = "all",
     val searchQuery: String = "",
     val searchResults: List<FoodItem> = emptyList(),
     val cartItems: List<CartItem> = emptyList(),
@@ -42,7 +42,10 @@ data class CheeseBiteUiState(
     val isDarkTheme: Boolean = true,
     val notifications: List<AppNotification> = CheeseBiteRepository.initialNotifications,
     val isOrderProcessing: Boolean = false,
-    val selectedFoodItem: FoodItem? = null
+    val selectedFoodItem: FoodItem? = null,
+    val isSubmittingReview: Boolean = false,
+    val reviewSuccessEventId: String? = null,
+    val isReviewSuccessNotificationVisible: Boolean = false
 ) {
     val cartItemCount: Int
         get() = cartItems.sumOf { it.quantity }
@@ -120,16 +123,135 @@ class CheeseBiteViewModel : ViewModel() {
         _uiState.update { it.copy(selectedCategoryId = categoryId) }
     }
 
+    fun getItemsForCategory(categoryId: String): List<FoodItem> {
+        val items = _uiState.value.allFoodItems
+        return when (categoryId.lowercase()) {
+            "pizza" -> items.filter { it.category == "special_pizza" || it.category == "regular_pizza" || it.category == "pizza" }
+            "special_pizza" -> items.filter { it.category == "special_pizza" }
+            "regular_pizza" -> items.filter { it.category == "regular_pizza" }
+            "deals" -> items.filter { it.category == "deals" }
+            "burgers" -> items.filter { it.category == "burgers" }
+            "wraps" -> items.filter { it.category == "wraps" }
+            "shawarma" -> items.filter { it.category == "shawarma" }
+            "fries" -> items.filter { it.category == "fries" }
+            "drinks" -> items.filter { it.category == "drinks" }
+            "hot_wings" -> items.filter { it.category == "hot_wings" }
+            "cheese_pasta", "pasta" -> items.filter { it.category == "cheese_pasta" }
+            "bbq" -> items.filter { it.category == "bbq" }
+            "sweets" -> items.filter { it.category == "sweets" }
+            "all" -> items
+            else -> items.filter { it.category.equals(categoryId, ignoreCase = true) }
+        }
+    }
+
+    fun getSpecialPizzas(): List<FoodItem> {
+        return _uiState.value.allFoodItems.filter { it.category == "special_pizza" }
+    }
+
+    fun getRegularPizzas(): List<FoodItem> {
+        return _uiState.value.allFoodItems.filter { it.category == "regular_pizza" }
+    }
+
+    fun getStudentDeals(): List<FoodItem> {
+        return _uiState.value.allFoodItems.filter { it.category == "deals" && it.name.contains("Student", ignoreCase = true) }
+    }
+
+    fun getPizzaDeals(): List<FoodItem> {
+        return _uiState.value.allFoodItems.filter { it.category == "deals" && it.name.contains("Pizza", ignoreCase = true) }
+    }
+
+    fun getBurgerDeals(): List<FoodItem> {
+        return _uiState.value.allFoodItems.filter { it.category == "deals" && it.name.contains("Burger", ignoreCase = true) }
+    }
+
     fun onSearchQueryChanged(query: String) {
         _uiState.update { state ->
-            val trimmed = query.trim()
+            val trimmed = query.trim().lowercase()
             val filtered = if (trimmed.isEmpty()) {
                 emptyList()
             } else {
+                val tokens = trimmed.split(Regex("\\s+")).filter { it.isNotBlank() }
+                val isFriesSearch = tokens.any { it in listOf("fries", "fry", "potato") }
+                val isDrinkSearch = tokens.any { it in listOf("drink", "drinks", "beverage", "soda", "pepsi", "water", "coke") }
+                val isShawarmaSearch = tokens.any { it in listOf("shawarma", "shwarma") }
+                val isWrapSearch = tokens.any { it in listOf("wrap", "wraps", "twister", "paratha") }
+                val isPastaSearch = tokens.any { it in listOf("pasta", "alfrado", "stick", "sticks") }
+                val isBbqSearch = tokens.any { it in listOf("bbq", "tikka", "boti", "kabab", "skewer") }
+                val isSweetSearch = tokens.any { it in listOf("sweet", "sweets", "dessert", "kanafa", "salad") }
+                val isBurgerSearch = tokens.any { it in listOf("burger", "zinger") }
+                val isPizzaSearch = tokens.any { it in listOf("pizza", "pizzas") }
+                val isDealSearch = tokens.any { it in listOf("deal", "deals", "combo", "combos") }
+
                 state.allFoodItems.filter { item ->
-                    item.name.contains(trimmed, ignoreCase = true) ||
-                            item.description.contains(trimmed, ignoreCase = true) ||
-                            item.category.contains(trimmed, ignoreCase = true)
+                    val nameLower = item.name.lowercase()
+                    val descLower = item.description.lowercase()
+                    val catLower = item.category.lowercase()
+
+                    // Category-specific query safeguards to prevent unrelated cross-contamination
+                    if (isFriesSearch && !isDealSearch && !isPizzaSearch && !isBurgerSearch) {
+                        return@filter catLower == "fries" || nameLower.contains("fries")
+                    }
+
+                    if (isDrinkSearch && !isDealSearch && !isPizzaSearch && !isBurgerSearch) {
+                        return@filter catLower == "drinks" || nameLower.contains("drink") || nameLower.contains("water") || nameLower.contains("soda")
+                    }
+
+                    if (isShawarmaSearch && !isDealSearch) {
+                        return@filter catLower == "shawarma"
+                    }
+
+                    if (isWrapSearch && !isDealSearch) {
+                        return@filter catLower == "wraps"
+                    }
+
+                    if (isPastaSearch && !isDealSearch) {
+                        return@filter catLower == "cheese_pasta"
+                    }
+
+                    if (isSweetSearch && !isDealSearch) {
+                        return@filter catLower == "sweets"
+                    }
+
+                    if (isBbqSearch && !isDealSearch && !isPizzaSearch) {
+                        return@filter catLower == "bbq" || (nameLower.contains("tikka") && !nameLower.contains("pizza")) || nameLower.contains("boti") || nameLower.contains("kabab")
+                    }
+
+                    if (isBurgerSearch && !isPizzaSearch) {
+                        if (catLower == "burgers") return@filter true
+                        if (isDealSearch && catLower == "deals" && (nameLower.contains("burger deal") || nameLower.contains("zinger"))) return@filter true
+                        if (!isDealSearch && catLower == "deals") return@filter false
+                        if (nameLower.contains("burger") || nameLower.contains("zinger")) return@filter true
+                        return@filter false
+                    }
+
+                    if (isPizzaSearch && !isBurgerSearch) {
+                        if (catLower == "special_pizza" || catLower == "regular_pizza") return@filter true
+                        if (isDealSearch && catLower == "deals" && nameLower.contains("pizza")) return@filter true
+                        if (!isDealSearch && catLower == "deals") return@filter false
+                        if (nameLower.contains("pizza")) return@filter true
+                        return@filter false
+                    }
+
+                    if (isDealSearch) {
+                        if (catLower == "deals") return@filter true
+                        return@filter nameLower.contains("deal")
+                    }
+
+                    // General token matches
+                    val nameMatchesAll = tokens.all { token -> nameLower.contains(token) }
+                    if (nameMatchesAll) return@filter true
+
+                    val nameMatchesAny = tokens.any { token -> nameLower.contains(token) }
+                    if (nameMatchesAny && tokens.size > 1) return@filter true
+
+                    if (tokens.all { descLower.contains(it) }) {
+                        if (catLower == "deals") {
+                            return@filter tokens.any { nameLower.contains(it) }
+                        }
+                        return@filter true
+                    }
+
+                    false
                 }
             }
             state.copy(searchQuery = query, searchResults = filtered)
@@ -373,5 +495,54 @@ class CheeseBiteViewModel : ViewModel() {
 
     fun clearNotifications() {
         _uiState.update { it.copy(notifications = emptyList()) }
+    }
+
+    fun submitReview(
+        rating: Double,
+        reviewText: String,
+        onSuccess: () -> Unit = {},
+        onError: (String) -> Unit = {}
+    ) {
+        // Prevent duplicate concurrent requests
+        if (_uiState.value.isSubmittingReview) return
+
+        // Validation check
+        if (rating <= 0.0) {
+            val errorMsg = "Please select a star rating before submitting."
+            viewModelScope.launch { _snackbarMessages.emit(errorMsg) }
+            onError(errorMsg)
+            return
+        }
+
+        _uiState.update { it.copy(isSubmittingReview = true) }
+
+        viewModelScope.launch {
+            try {
+                // Existing review submission/API process simulation
+                delay(700)
+
+                val uniqueEventId = UUID.randomUUID().toString()
+
+                // Only once backend successfully confirms the review:
+                _uiState.update { state ->
+                    state.copy(
+                        isSubmittingReview = false,
+                        reviewSuccessEventId = uniqueEventId,
+                        isReviewSuccessNotificationVisible = true
+                    )
+                }
+
+                onSuccess()
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isSubmittingReview = false) }
+                val errorMsg = e.message ?: "Failed to submit review. Please try again."
+                _snackbarMessages.emit(errorMsg)
+                onError(errorMsg)
+            }
+        }
+    }
+
+    fun dismissReviewSuccessNotification() {
+        _uiState.update { it.copy(isReviewSuccessNotificationVisible = false) }
     }
 }

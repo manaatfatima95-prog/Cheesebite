@@ -3,6 +3,6 @@
     <item
         android:width="66dp"
         android:height="66dp"
-        android:drawable="@drawable/ic_cheese_bite_logo"
+        android:drawable="@drawable/ic_cheese_bite_symbol"
         android:gravity="center" />
 </layer-list>

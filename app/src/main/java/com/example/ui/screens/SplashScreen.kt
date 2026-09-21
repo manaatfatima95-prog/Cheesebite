@@ -32,6 +32,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
+import com.example.ui.components.branding.CheeseBiteSymbol
+import com.example.ui.components.branding.CheseeBiteWordmark
+import com.example.ui.theme.BrandCharcoalDark
+import com.example.ui.theme.BrandCheeseYellow
 import com.example.ui.theme.CheeseGoldPrimary
 import kotlinx.coroutines.delay
 
@@ -66,47 +70,43 @@ fun SplashScreen(
         ) {
             Box(
                 modifier = Modifier
-                    .size(130.dp)
-                    .clip(RoundedCornerShape(32.dp))
-                    .background(CheeseGoldPrimary.copy(alpha = 0.15f)),
+                    .size(136.dp)
+                    .clip(RoundedCornerShape(36.dp))
+                    .background(BrandCharcoalDark)
+                    .padding(20.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_cheese_bite_logo),
-                    contentDescription = "Cheese Bite Logo",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(110.dp)
-                        .clip(RoundedCornerShape(26.dp))
+                CheeseBiteSymbol(
+                    size = 96.dp,
+                    badgeShape = false
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(26.dp))
 
-            Text(
-                text = "Cheese Bite",
-                style = MaterialTheme.typography.headlineMedium.copy(
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 32.sp
-                ),
-                color = CheeseGoldPrimary
+            CheseeBiteWordmark(
+                isDarkBackground = MaterialTheme.colorScheme.background.run {
+                    (red * 0.299f + green * 0.587f + blue * 0.114f) < 0.5f
+                },
+                isHorizontal = false,
+                fontSizeMultiplier = 1.15f
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Hot & Cheesy Goodness",
+                text = "Delicious Food • Quality • Pure Chesee",
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontWeight = FontWeight.Medium,
                     letterSpacing = 1.2.sp
                 ),
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f)
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.75f)
             )
 
             Spacer(modifier = Modifier.height(36.dp))
 
             CircularProgressIndicator(
-                color = CheeseGoldPrimary,
+                color = BrandCheeseYellow,
                 strokeWidth = 3.dp,
                 modifier = Modifier.size(30.dp)
             )

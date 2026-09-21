@@ -1,6 +1,6 @@
 {
-  "name": "Cheese Bite",
-  "description": "Official food-ordering mobile app for Cheese Bites Restaurant featuring full menu, pizza deals, burger combos, customizable items, cart, order checkout, and live order tracking.",
+  "name": "Chesee Bite Resturent",
+  "description": "Official mobile app and digital ordering platform for Chesee Bite Resturent featuring signature pizzas, burgers, deals, and live order tracking.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

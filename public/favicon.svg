@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cheeseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC727"/>
+      <stop offset="50%" stop-color="#FFB800"/>
+      <stop offset="100%" stop-color="#E59500"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A1E"/>
+      <stop offset="100%" stop-color="#121214"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Squircle -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Drop Shadow -->
+  <ellipse cx="32" cy="49" rx="18" ry="3.5" fill="#000000" opacity="0.35"/>
+
+  <!-- Cheese Block with Bite Out of Top-Right -->
+  <!-- Base rounded block minus circle at (46, 20) with radius 9 -->
+  <mask id="biteMask">
+    <!-- Solid white base -->
+    <rect width="64" height="64" fill="#FFFFFF"/>
+    <!-- Black circular bite cutout -->
+    <circle cx="48" cy="20" r="9.5" fill="#000000"/>
+    <!-- Secondary small melt notch -->
+    <circle cx="50" cy="30" r="4" fill="#000000"/>
+  </mask>
+
+  <!-- Cheese Body -->
+  <rect x="14" y="16" width="36" height="30" rx="7" fill="url(#cheeseGrad)" mask="url(#biteMask)"/>
+
+  <!-- Top highlight -->
+  <path d="M16 20 L24 16 L40 16 L38 21 L16 20 Z" fill="#FFFFFF" opacity="0.25"/>
+
+  <!-- Iconic Tone-on-tone Cheese Holes -->
+  <circle cx="25" cy="29" r="3.2" fill="#D97706"/>
+  <circle cx="37" cy="37" r="2.8" fill="#D97706"/>
+  <circle cx="36" cy="26" r="1.8" fill="#D97706"/>
+  <circle cx="23" cy="39" r="1.6" fill="#D97706"/>
+
+  <!-- Deep Red Accent Seal -->
+  <circle cx="19" cy="40" r="1.8" fill="#B71C1C"/>
+</svg>

@@ -1,0 +1,75 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Dark sleek studio background -->
+    <path
+        android:fillColor="#0B132B"
+        android:pathData="M0,0h200v200h-200z" />
+
+    <!-- Ambient glow -->
+    <path
+        android:fillColor="#1C2541"
+        android:pathData="M100,100m-75,0a75,75 0 1,0 150,0a75,75 0 1,0 -150,0" />
+
+    <!-- Left Can: Sprite Green -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M38,72 L58,72 C61,72 63,74 63,77 L63,158 C63,161 61,163 58,163 L38,163 C35,163 33,161 33,158 L33,77 C33,74 35,72 38,72 Z" />
+    <path
+        android:fillColor="#059669"
+        android:pathData="M38,72 L46,72 L46,163 L38,163 C35,163 33,161 33,158 L33,77 C33,74 35,72 38,72 Z" />
+    <!-- Can Rim top -->
+    <path
+        android:fillColor="#D1D5DB"
+        android:pathData="M35,68 L61,68 C62.5,68 64,69.5 64,71 L64,73 L32,73 L32,71 C32,69.5 33.5,68 35,68 Z" />
+
+    <!-- Middle-Left Can: Coca-Cola Red -->
+    <path
+        android:fillColor="#DC2626"
+        android:pathData="M73,62 L97,62 C100,62 103,65 103,68 L103,164 C103,167 100,170 97,170 L73,170 C70,170 67,167 67,164 L67,68 C67,65 70,62 73,62 Z" />
+    <path
+        android:fillColor="#B91C1C"
+        android:pathData="M73,62 L82,62 L82,170 L73,170 C70,170 67,167 67,164 L67,68 C67,65 70,62 73,62 Z" />
+    <!-- Coke wave strip -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M69,112 C78,118 92,108 101,114 L101,120 C92,114 78,124 69,118 Z" />
+    <!-- Rim -->
+    <path
+        android:fillColor="#E5E7EB"
+        android:pathData="M70,58 L100,58 C101.5,58 103,59.5 103,61 L103,63 L67,63 L67,61 C67,59.5 68.5,58 70,58 Z" />
+
+    <!-- Middle-Right Can: Diet Silver/Black -->
+    <path
+        android:fillColor="#4B5563"
+        android:pathData="M109,64 L133,64 C136,64 139,67 139,70 L139,166 C139,169 136,172 133,172 L109,172 C106,172 103,169 103,166 L103,70 C103,67 106,64 109,64 Z" />
+    <path
+        android:fillColor="#9CA3AF"
+        android:pathData="M116,64 L126,64 L126,172 L116,172 Z" />
+    <!-- Rim -->
+    <path
+        android:fillColor="#D1D5DB"
+        android:pathData="M106,60 L136,60 C137.5,60 139,61.5 139,63 L139,65 L103,65 L103,63 C103,61.5 104.5,60 106,60 Z" />
+
+    <!-- Right Can: Fanta Orange -->
+    <path
+        android:fillColor="#EA580C"
+        android:pathData="M144,74 L164,74 C167,74 169,76 169,79 L169,158 C169,161 167,163 164,163 L144,163 C141,163 139,161 139,158 L139,79 C139,76 141,74 144,74 Z" />
+    <path
+        android:fillColor="#C2410C"
+        android:pathData="M144,74 L152,74 L152,163 L144,163 C141,163 139,161 139,158 L139,79 C139,76 141,74 144,74 Z" />
+    <path
+        android:fillColor="#D1D5DB"
+        android:pathData="M141,70 L167,70 C168.5,70 170,71.5 170,73 L170,75 L138,75 L138,73 C138,71.5 139.5,70 141,70 Z" />
+
+    <!-- Ice splatters / condensation droplets -->
+    <path
+        android:fillColor="#60A5FA"
+        android:pathData="M85,38 L88,44 L94,46 L88,48 L85,54 L82,48 L76,46 L82,44 Z" />
+    <path
+        android:fillColor="#93C5FD"
+        android:pathData="M125,32 L127,37 L132,38 L127,40 L125,45 L123,40 L118,38 L123,37 Z" />
+</vector>

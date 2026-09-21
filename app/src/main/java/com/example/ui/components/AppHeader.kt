@@ -36,6 +36,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ui.components.branding.CheeseBiteSymbol
+import com.example.ui.theme.BrandCharcoalDark
 import com.example.ui.theme.CheeseGoldPrimary
 
 @Composable
@@ -63,7 +65,7 @@ fun AppHeader(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Location Selector
+                // Brand Icon & Location Selector
                 Row(
                     modifier = Modifier
                         .weight(1f)
@@ -74,16 +76,15 @@ fun AppHeader(
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(36.dp)
-                            .clip(CircleShape)
-                            .background(CheeseGoldPrimary.copy(alpha = 0.15f)),
+                            .size(38.dp)
+                            .clip(RoundedCornerShape(11.dp))
+                            .background(BrandCharcoalDark)
+                            .padding(4.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.LocationOn,
-                            contentDescription = "Delivery Location",
-                            tint = CheeseGoldPrimary,
-                            modifier = Modifier.size(20.dp)
+                        CheeseBiteSymbol(
+                            size = 28.dp,
+                            badgeShape = false
                         )
                     }
 

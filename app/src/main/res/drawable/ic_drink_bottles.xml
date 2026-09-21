@@ -1,0 +1,90 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Deep refreshing navy background -->
+    <path
+        android:fillColor="#071E3D"
+        android:pathData="M0,0h200v200h-200z" />
+
+    <!-- Ambient glow circle -->
+    <path
+        android:fillColor="#1F4287"
+        android:pathData="M100,100m-70,0a70,70 0 1,0 140,0a70,70 0 1,0 -140,0" />
+
+    <!-- Left Bottle: 7Up Bottle (Emerald Green) -->
+    <!-- Cap -->
+    <path
+        android:fillColor="#15803D"
+        android:pathData="M48,50h12v10h-12z" />
+    <!-- Neck -->
+    <path
+        android:fillColor="#16A34A"
+        android:pathData="M50,60 L58,60 L62,85 L46,85 Z" />
+    <!-- Body -->
+    <path
+        android:fillColor="#22C55E"
+        android:pathData="M44,85 C44,85 42,92 42,100 L42,160 C42,165 46,168 54,168 C62,168 66,165 66,160 L66,100 C66,92 64,85 64,85 Z" />
+    <!-- 7Up Red dot -->
+    <path
+        android:fillColor="#DC2626"
+        android:pathData="M54,125m-5,0a5,5 0 1,0 10,0a5,5 0 1,0 -10,0" />
+
+    <!-- Middle Bottle: Pepsi Bottle (Deep Royal Blue & Red) -->
+    <!-- Cap -->
+    <path
+        android:fillColor="#1D4ED8"
+        android:pathData="M94,40h12v11h-12z" />
+    <!-- Neck -->
+    <path
+        android:fillColor="#2563EB"
+        android:pathData="M96,51 L104,51 L110,80 L90,80 Z" />
+    <!-- Body -->
+    <path
+        android:fillColor="#1E40AF"
+        android:pathData="M88,80 C88,80 85,88 85,98 L85,166 C85,171 90,174 100,174 C110,174 115,171 115,166 L115,98 C115,88 112,80 112,80 Z" />
+    <!-- Pepsi Globe Wave -->
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M85,114 C92,110 100,120 115,116 L115,124 C105,126 95,118 85,122 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M85,122 C95,118 105,126 115,124 L115,128 C105,130 95,122 85,126 Z" />
+    <path
+        android:fillColor="#2563EB"
+        android:pathData="M85,126 C95,122 105,130 115,128 L115,135 C102,137 92,128 85,132 Z" />
+
+    <!-- Right Bottle: Clear Crystal Mineral Water (Cyan / Ice White) -->
+    <!-- Cap -->
+    <path
+        android:fillColor="#0284C7"
+        android:pathData="M142,48h12v10h-12z" />
+    <!-- Neck -->
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M144,58 L152,58 L157,84 L139,84 Z" />
+    <!-- Body -->
+    <path
+        android:fillColor="#BAE6FD"
+        android:pathData="M137,84 C137,84 135,91 135,99 L135,161 C135,165 139,168 148,168 C157,168 161,165 161,161 L161,99 C161,91 159,84 159,84 Z" />
+    <!-- Water label -->
+    <path
+        android:fillColor="#0284C7"
+        android:pathData="M135,115h26v16h-26z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M138,123h20v2h-20z" />
+
+    <!-- Sparkling water droplets / bubbles -->
+    <path
+        android:fillColor="#E0F2FE"
+        android:pathData="M76,68m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0" />
+    <path
+        android:fillColor="#E0F2FE"
+        android:pathData="M126,62m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0" />
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M100,24 L103,30 L109,32 L103,34 L100,40 L97,34 L91,32 L97,30 Z" />
+</vector>

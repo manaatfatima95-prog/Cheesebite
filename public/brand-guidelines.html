@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chesee Bite Resturent — Brand Identity & Logo System</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    :root {
+      --charcoal: #141416;
+      --charcoal-dark: #0f0f10;
+      --cheese-yellow: #FFB800;
+      --cheese-gold: #F5A623;
+      --warm-cream: #FFFDF7;
+      --warm-cream-muted: #FAF7EE;
+      --deep-red: #B71C1C;
+      --text-muted: #71717A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--charcoal-dark);
+      color: var(--warm-cream);
+      padding: 32px 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(255,184,0,0.15);
+      color: var(--cheese-yellow);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    h1 span { color: var(--cheese-yellow); }
+    p.subhead {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .card {
+      background: #1B1C20;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .preview {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .preview.light {
+      background: var(--warm-cream);
+      color: var(--charcoal);
+    }
+    .preview.dark {
+      background: var(--charcoal);
+      color: var(--warm-cream);
+    }
+    .preview.mono {
+      background: #000000;
+    }
+    .info {
+      padding: 20px;
+      flex-grow: 1;
+    }
+    .info h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .colors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .color-swatch {
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .color-swatch .preview-box {
+      height: 48px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .swatch-title { font-weight: 700; font-size: 14px; }
+    .swatch-hex { font-family: monospace; font-size: 12px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Official Brand Guidelines</div>
+      <h1>Chesee <span>Bite</span> Resturent</h1>
+      <p class="subhead">A premium, modern restaurant brand identity centered around the distinctive Cheese Bite visual mark.</p>
+    </header>
+
+    <div class="grid">
+      <!-- 1. Primary Logo -->
+      <div class="card">
+        <div class="preview dark">
+          <img src="/logo-primary.svg" alt="Primary Logo" style="height: 140px;">
+        </div>
+        <div class="info">
+          <h3>1. Primary Logo</h3>
+          <p>Stacked vertical lockup with signature cheese bite symbol, "Chesee Bite" bold mark, and tracked "RESTURENT" label.</p>
+        </div>
+      </div>
+
+      <!-- 2. Horizontal Logo -->
+      <div class="card">
+        <div class="preview dark">
+          <img src="/logo-horizontal.svg" alt="Horizontal Logo" style="max-width: 90%;">
+        </div>
+        <div class="info">
+          <h3>2. Horizontal Logo</h3>
+          <p>Optimized for website navigation header, app headers, food packaging labels, and wide banners.</p>
+        </div>
+      </div>
+
+      <!-- 3. Icon Logo -->
+      <div class="card">
+        <div class="preview dark">
+          <img src="/favicon.svg" alt="Icon Logo" style="height: 80px;">
+        </div>
+        <div class="info">
+          <h3>3. Icon Logo (Cheese Bite Mark)</h3>
+          <p>Standalone minimalist cheese-bite symbol. Used as Android app icon, website favicon, and social media avatar.</p>
+        </div>
+      </div>
+
+      <!-- 4. Light Surface Version -->
+      <div class="card">
+        <div class="preview light">
+          <img src="/logo-horizontal.svg" alt="Light Surface Logo" style="max-width: 90%;">
+        </div>
+        <div class="info">
+          <h3>4. Light Surface Version</h3>
+          <p>High contrast on warm cream / white surfaces for printed menus, takeout receipts, and delivery bags.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 48px; font-size: 24px;">Brand Color Palette</h2>
+    <div class="colors">
+      <div class="color-swatch">
+        <div class="preview-box" style="background: var(--charcoal);"></div>
+        <div class="swatch-title">Deep Charcoal</div>
+        <div class="swatch-hex">#141416</div>
+      </div>
+      <div class="color-swatch">
+        <div class="preview-box" style="background: var(--cheese-yellow);"></div>
+        <div class="swatch-title">Warm Cheese Yellow</div>
+        <div class="swatch-hex">#FFB800</div>
+      </div>
+      <div class="color-swatch">
+        <div class="preview-box" style="background: var(--warm-cream); border: 1px solid #ddd;"></div>
+        <div class="swatch-title" style="color: var(--warm-cream);">Warm Cream</div>
+        <div class="swatch-hex">#FFFDF7</div>
+      </div>
+      <div class="color-swatch">
+        <div class="preview-box" style="background: var(--deep-red);"></div>
+        <div class="swatch-title">Restrained Deep Red</div>
+        <div class="swatch-hex">#B71C1C</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

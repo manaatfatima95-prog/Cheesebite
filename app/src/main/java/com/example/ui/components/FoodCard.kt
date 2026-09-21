@@ -34,16 +34,65 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.R
 import com.example.model.FoodItem
 import com.example.ui.theme.CheeseGoldPrimary
 import com.example.ui.theme.CheeseRed
+
+fun getFoodCategoryFallbackRes(category: String): Int {
+    return when (category.lowercase()) {
+        "drinks" -> R.drawable.ic_beverage_default
+        "burgers" -> R.drawable.food_zinger_burger
+        "fries" -> R.drawable.food_loaded_fries
+        "wraps", "shawarma" -> R.drawable.img_shawarma_wraps_1789975672178
+        "bbq" -> R.drawable.img_seekh_kabab_1789975621596
+        "hot_wings", "wings", "nuggets" -> R.drawable.img_crispy_hot_wings_1789979409794
+        "cheese_pasta" -> R.drawable.img_cheese_sticks_1789975863071
+        "sweets" -> R.drawable.img_cheese_kunafa_1789975814483
+        else -> R.drawable.food_special_pizza
+    }
+}
+
+@Composable
+fun FoodItemThumbnail(
+    foodItem: FoodItem,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Crop
+) {
+    val fallbackRes = foodItem.imageRes ?: getFoodCategoryFallbackRes(foodItem.category)
+    val context = LocalContext.current
+
+    if (!foodItem.imageUrl.isNullOrBlank()) {
+        AsyncImage(
+            model = ImageRequest.Builder(context)
+                .data(foodItem.imageUrl)
+                .crossfade(true)
+                .placeholder(fallbackRes)
+                .error(fallbackRes)
+                .fallback(fallbackRes)
+                .build(),
+            contentDescription = foodItem.label.ifBlank { foodItem.name },
+            contentScale = contentScale,
+            modifier = modifier
+        )
+    } else {
+        Image(
+            painter = painterResource(id = fallbackRes),
+            contentDescription = foodItem.label.ifBlank { foodItem.name },
+            contentScale = contentScale,
+            modifier = modifier
+        )
+    }
+}
 
 @Composable
 fun VerticalFoodCard(
@@ -74,11 +123,8 @@ fun VerticalFoodCard(
                     .background(MaterialTheme.colorScheme.surfaceVariant)
             ) {
                 // Food Image
-                val imageRes = foodItem.imageRes ?: R.drawable.food_special_pizza
-                Image(
-                    painter = painterResource(id = imageRes),
-                    contentDescription = foodItem.name,
-                    contentScale = ContentScale.Crop,
+                FoodItemThumbnail(
+                    foodItem = foodItem,
                     modifier = Modifier.matchParentSize()
                 )
 
@@ -232,11 +278,8 @@ fun HorizontalFoodCard(
                     .clip(RoundedCornerShape(12.dp))
                     .background(MaterialTheme.colorScheme.surfaceVariant)
             ) {
-                val imageRes = foodItem.imageRes ?: R.drawable.food_special_pizza
-                Image(
-                    painter = painterResource(id = imageRes),
-                    contentDescription = foodItem.name,
-                    contentScale = ContentScale.Crop,
+                FoodItemThumbnail(
+                    foodItem = foodItem,
                     modifier = Modifier.matchParentSize()
                 )
 

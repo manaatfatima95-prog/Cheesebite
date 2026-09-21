@@ -20,6 +20,8 @@ data class FoodItem(
     val sizes: List<FoodSize> = emptyList(),
     val availableAddOns: List<FoodAddOn> = emptyList(),
     val imageRes: Int? = null,
+    val imageUrl: String? = null,
+    val label: String = name,
     val isBestseller: Boolean = false,
     val rating: Double = 4.8,
     val reviewCount: Int = 38,

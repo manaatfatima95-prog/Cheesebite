@@ -46,6 +46,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,6 +62,7 @@ import androidx.compose.ui.unit.sp
 import com.example.model.Order
 import com.example.model.OrderStatus
 import com.example.ui.components.EmptyStateView
+import com.example.ui.components.OrderSuccessNotification
 import com.example.ui.components.PrimaryButton
 import com.example.ui.components.StatusBadge
 import com.example.ui.theme.CheeseGoldDark
@@ -79,6 +83,7 @@ fun OrderTrackingScreen(
     viewModel: CheeseBiteViewModel,
     onBackClick: () -> Unit,
     onExploreMenuClick: () -> Unit,
+    showSuccessConfirmation: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -92,6 +97,8 @@ fun OrderTrackingScreen(
         uiState.activeOrder ?: uiState.pastOrders.firstOrNull()
     }
 
+    var bannerDismissed by remember(orderId) { mutableStateOf(false) }
+
     val steps = listOf(
         TimelineStep(OrderStatus.PLACED, "Order Received", "Cheese Bite received your order", Icons.Default.Fastfood),
         TimelineStep(OrderStatus.ACCEPTED, "Order Accepted", "Restaurant kitchen accepted order", Icons.Default.Restaurant),
@@ -101,12 +108,15 @@ fun OrderTrackingScreen(
         TimelineStep(OrderStatus.DELIVERED, "Order Delivered", "Delivered hot! Enjoy your meal", Icons.Default.Check)
     )
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
             .statusBarsPadding()
             .testTag("order_tracking_screen")
     ) {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
         // App Bar
         Surface(
             color = MaterialTheme.colorScheme.surface,
@@ -450,5 +460,17 @@ fun OrderTrackingScreen(
                 }
             }
         }
+    }
+
+    // Professional blue order-success notification (floats above the screen)
+    OrderSuccessNotification(
+            visible = showSuccessConfirmation && !bannerDismissed,
+            orderId = orderId ?: order?.orderId,
+            onDismiss = { bannerDismissed = true },
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .navigationBarsPadding()
+                .padding(bottom = 16.dp)
+        )
     }
 }

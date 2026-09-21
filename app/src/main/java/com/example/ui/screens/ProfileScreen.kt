@@ -33,10 +33,12 @@ import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ReceiptLong
+import androidx.compose.material.icons.filled.SmartToy
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -79,6 +81,7 @@ fun ProfileScreen(
     onNavigateToFavorites: () -> Unit,
     onNavigateToOrders: () -> Unit,
     onNavigateToRestaurant: () -> Unit,
+    onNavigateToChatbot: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -203,6 +206,15 @@ fun ProfileScreen(
                             title = "My Favorite Bites",
                             subtitle = "${uiState.favoriteItemIds.size} saved dishes",
                             onClick = onNavigateToFavorites
+                        )
+
+                        HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
+
+                        ProfileMenuItem(
+                            icon = Icons.Default.SmartToy,
+                            title = "Cheese Bites AI Assistant",
+                            subtitle = "Ask about menu, prices, deals & hours",
+                            onClick = onNavigateToChatbot
                         )
 
                         HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
@@ -502,14 +514,32 @@ fun ProfileScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        showReviewDialog = false
-                    }
+                        viewModel.submitReview(
+                            rating = rating,
+                            reviewText = reviewText,
+                            onSuccess = {
+                                showReviewDialog = false
+                            }
+                        )
+                    },
+                    enabled = !uiState.isSubmittingReview
                 ) {
-                    Text("Submit Review", fontWeight = FontWeight.Bold, color = CheeseGoldPrimary)
+                    if (uiState.isSubmittingReview) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(18.dp),
+                            color = CheeseGoldPrimary,
+                            strokeWidth = 2.dp
+                        )
+                    } else {
+                        Text("Submit Review", fontWeight = FontWeight.Bold, color = CheeseGoldPrimary)
+                    }
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showReviewDialog = false }) {
+                TextButton(
+                    onClick = { showReviewDialog = false },
+                    enabled = !uiState.isSubmittingReview
+                ) {
                     Text("Cancel")
                 }
             }

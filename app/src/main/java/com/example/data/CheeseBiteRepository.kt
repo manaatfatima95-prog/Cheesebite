@@ -43,18 +43,17 @@ object CheeseBiteRepository {
     )
 
     val categories = listOf(
-        FoodCategory("deals", "Deals & Combos", "🔥", "Mega savings on pizza & burger combos"),
-        FoodCategory("special_pizza", "Special Pizza", "🍕", "Gourmet crust with loaded premium toppings"),
-        FoodCategory("regular_pizza", "Regular Pizza", "🧀", "Classic favorites baked fresh to perfection"),
+        FoodCategory("pizza", "Pizza", "🍕", "Special Pizza & Regular Pizza"),
         FoodCategory("burgers", "Burgers", "🍔", "Crispy zingers and juicy grilled burgers"),
         FoodCategory("wraps", "Wraps", "🌯", "Fresh grilled chicken rolled in soft tortilla"),
         FoodCategory("shawarma", "Shawarma", "🥙", "Authentic spiced chicken & creamy garlic tahini"),
-        FoodCategory("cheese_pasta", "Cheese Stick & Pasta", "🍝", "Al-Frado, cheese sticks & baked panni pasta"),
-        FoodCategory("fries", "Fries & Sides", "🍟", "Loaded cheese fries & seasoned crispy potatoes"),
+        FoodCategory("fries", "Fries", "🍟", "Loaded cheese fries & seasoned crispy potatoes"),
+        FoodCategory("drinks", "Drinks", "🥤", "Water bottles, soft drinks & cold cans"),
         FoodCategory("hot_wings", "Wings & Nuggets", "🍗", "Golden crispy wings and tenders"),
+        FoodCategory("cheese_pasta", "Pasta", "🍝", "Al-Frado, cheese sticks & baked panni pasta"),
         FoodCategory("bbq", "Bar. B.Q", "🍢", "Charcoal-grilled tikka & boti skewers"),
         FoodCategory("sweets", "Sweets & Desserts", "🍰", "Cheese kanafa & fresh sweet salad"),
-        FoodCategory("drinks", "Chilled Drinks", "🥤", "Water bottles, soft drinks & cold cans")
+        FoodCategory("deals", "Deals", "🔥", "Student Deals, Pizza Deals & Burger Deals")
     )
 
     val foodItems: List<FoodItem> = listOf(
@@ -523,6 +522,7 @@ object CheeseBiteRepository {
             description = "Thinly shaved rotisserie chicken wrapped in pita bread with pickled cucumbers and garlic toum sauce.",
             category = "shawarma",
             basePrice = 200.0,
+            imageRes = R.drawable.img_shawarma_wraps_1789975672178,
             availableAddOns = defaultAddOns,
             isBestseller = true,
             rating = 4.8
@@ -553,6 +553,7 @@ object CheeseBiteRepository {
             description = "Crispy breaded mozzarella cheese sticks deep fried till golden brown with warm marinara dipping sauce.",
             category = "cheese_pasta",
             basePrice = 600.0,
+            imageRes = R.drawable.img_cheese_sticks_1789975863071,
             availableAddOns = defaultAddOns,
             isBestseller = true,
             rating = 4.9
@@ -563,6 +564,7 @@ object CheeseBiteRepository {
             description = "Penne pasta baked under a thick golden blanket of cheese with rich spiced chicken and creamy sauce.",
             category = "cheese_pasta",
             basePrice = 700.0,
+            imageRes = R.drawable.img_baked_pasta_1789975848633,
             availableAddOns = defaultAddOns,
             rating = 4.8
         ),
@@ -638,6 +640,7 @@ object CheeseBiteRepository {
             description = "10 pieces of fiery crispy fried chicken wings coated in secret spices.",
             category = "hot_wings",
             basePrice = 600.0,
+            imageRes = R.drawable.img_crispy_hot_wings_1789979409794,
             availableAddOns = defaultAddOns,
             isBestseller = true,
             rating = 4.9
@@ -645,9 +648,11 @@ object CheeseBiteRepository {
         FoodItem(
             id = "nuggets_10",
             name = "Nugetts (10 Pc)",
+            label = "Crispy Golden Chicken Bites with Dipping Sauces",
             description = "10 pieces of bite-sized golden chicken nuggets served with honey mustard dip.",
             category = "hot_wings",
             basePrice = 500.0,
+            imageRes = R.drawable.crispy_chicken_bites_1789995968552,
             availableAddOns = defaultAddOns,
             rating = 4.7
         ),
@@ -659,6 +664,7 @@ object CheeseBiteRepository {
             description = "Succulent chicken quarter leg/breast marinated in traditional spices, char-grilled over hot coals.",
             category = "bbq",
             basePrice = 150.0,
+            imageRes = R.drawable.img_chicken_boti_1789975641502,
             rating = 4.8
         ),
         FoodItem(
@@ -672,9 +678,11 @@ object CheeseBiteRepository {
         FoodItem(
             id = "bbq_malai_boti",
             name = "Chicken Malai Boti",
+            label = "Grilled Chicken Malai Boti Skewers with Mint Chutney",
             description = "Melt-in-your-mouth boneless chicken cubes marinated in heavy cream, yogurt, and white pepper.",
             category = "bbq",
             basePrice = 300.0,
+            imageRes = R.drawable.malai_tikka_skewers_1789995983431,
             rating = 4.9
         ),
         FoodItem(
@@ -683,6 +691,7 @@ object CheeseBiteRepository {
             description = "Tender chicken marinated in crushed coriander, mint, green chilies, and lemon juice.",
             category = "bbq",
             basePrice = 350.0,
+            imageRes = R.drawable.img_hariyali_tikka_1789975656702,
             rating = 4.8
         ),
         FoodItem(
@@ -691,6 +700,7 @@ object CheeseBiteRepository {
             description = "Juicy ground beef kababs seasoned with roasted cumin, coriander seeds, and crushed chili.",
             category = "bbq",
             basePrice = 200.0,
+            imageRes = R.drawable.img_seekh_kabab_1789975621596,
             rating = 4.8
         ),
 
@@ -701,6 +711,7 @@ object CheeseBiteRepository {
             description = "Golden crunchy shredded phyllo pastry filled with gooey sweet stretchy cheese and soaked in rose water syrup.",
             category = "sweets",
             basePrice = 850.0,
+            imageRes = R.drawable.img_cheese_kunafa_1789975814483,
             isBestseller = true,
             rating = 4.9
         ),
@@ -710,58 +721,115 @@ object CheeseBiteRepository {
             description = "Diced seasonal fruits, sweet peas, pineapple chunks, and potatoes in chilled sweet cream mayonnaise dressing.",
             category = "sweets",
             basePrice = 300.0,
+            imageRes = R.drawable.img_russian_salad_1789975831584,
             rating = 4.7
         ),
 
-        // === DRINKS ===
+        // === DRINKS & BEVERAGES ===
+        FoodItem(
+            id = "drk_soda_selection",
+            name = "Soda Selection (Sprite, Diet Coke, Coca-Cola, Fanta)",
+            label = "Soda Selection (Sprite, Diet Coke, Coca-Cola, Fanta)",
+            description = "Assorted soft drinks including Sprite, Diet Coke, Coca-Cola Classic, and Fanta Orange.",
+            category = "drinks",
+            basePrice = 130.0,
+            imageUrl = "https://example.com/assets/images/drinks/soda_selection.jpg",
+            imageRes = R.drawable.ic_drink_soda,
+            isBestseller = true,
+            rating = 4.9
+        ),
+        FoodItem(
+            id = "drk_bottled_beverages",
+            name = "Bottled Beverages (Pepsi, 7Up, Mineral Water)",
+            label = "Bottled Beverages (Pepsi, 7Up, Mineral Water)",
+            description = "Chilled Pepsi, 7Up, and bottled mineral water.",
+            category = "drinks",
+            basePrice = 100.0,
+            imageUrl = "https://example.com/assets/images/drinks/pepsi_7up_water.jpg",
+            imageRes = R.drawable.ic_drink_bottles,
+            isBestseller = true,
+            rating = 4.8
+        ),
+        FoodItem(
+            id = "drk_assorted_bottles",
+            name = "Assorted Soft Drink Bottles (440ml / 450ml)",
+            label = "Assorted Soft Drink Bottles (440ml / 450ml)",
+            description = "Individual 440ml and 450ml bottles of Coca-Cola, Fanta, Sprite, and Sparletta.",
+            category = "drinks",
+            basePrice = 120.0,
+            imageUrl = "https://example.com/assets/images/drinks/assorted_bottles.jpg",
+            imageRes = R.drawable.ic_drink_assorted,
+            rating = 4.8
+        ),
         FoodItem(
             id = "drk_water_sm",
             name = "Small Mineral Water",
+            label = "Small Mineral Water",
             description = "Purified 500ml drinking water bottle.",
             category = "drinks",
-            basePrice = 60.0
+            basePrice = 60.0,
+            imageUrl = "https://example.com/assets/images/drinks/pepsi_7up_water.jpg",
+            imageRes = R.drawable.ic_drink_bottles
         ),
         FoodItem(
             id = "drk_water_lg",
             name = "Large Mineral Water",
+            label = "Large Mineral Water",
             description = "Purified 1.5 Liter drinking water bottle.",
             category = "drinks",
-            basePrice = 100.0
+            basePrice = 100.0,
+            imageUrl = "https://example.com/assets/images/drinks/pepsi_7up_water.jpg",
+            imageRes = R.drawable.ic_drink_bottles
         ),
         FoodItem(
             id = "drk_half_ltr",
             name = "Half Ltr Cold Drink",
+            label = "Half Ltr Cold Drink",
             description = "Chilled 500ml bottle (Pepsi, 7Up, Mirinda, or Marinda).",
             category = "drinks",
-            basePrice = 120.0
+            basePrice = 120.0,
+            imageUrl = "https://example.com/assets/images/drinks/assorted_bottles.jpg",
+            imageRes = R.drawable.ic_drink_assorted
         ),
         FoodItem(
             id = "drk_nr",
             name = "N.R Cold Drink",
+            label = "N.R Cold Drink",
             description = "Single serving returnable bottle chilled soft drink.",
             category = "drinks",
-            basePrice = 80.0
+            basePrice = 80.0,
+            imageUrl = "https://example.com/assets/images/drinks/soda_selection.jpg",
+            imageRes = R.drawable.ic_drink_soda
         ),
         FoodItem(
             id = "drk_1_ltr",
             name = "1 Ltr Cold Drink",
+            label = "1 Ltr Cold Drink",
             description = "Chilled 1.0 Liter bottle of your favorite soda.",
             category = "drinks",
-            basePrice = 180.0
+            basePrice = 180.0,
+            imageUrl = "https://example.com/assets/images/drinks/assorted_bottles.jpg",
+            imageRes = R.drawable.ic_drink_assorted
         ),
         FoodItem(
             id = "drk_1_5_ltr",
             name = "1.5 Ltr Cold Drink",
+            label = "1.5 Ltr Cold Drink",
             description = "Chilled 1.5 Liter jumbo bottle, ideal for deals and combos.",
             category = "drinks",
-            basePrice = 220.0
+            basePrice = 220.0,
+            imageUrl = "https://example.com/assets/images/drinks/pepsi_7up_water.jpg",
+            imageRes = R.drawable.ic_drink_bottles
         ),
         FoodItem(
             id = "drk_can",
             name = "Drink Can (250ml)",
+            label = "Drink Can (250ml)",
             description = "Chilled aluminium soda can (Pepsi, 7Up, Dew, Coca-Cola).",
             category = "drinks",
-            basePrice = 130.0
+            basePrice = 130.0,
+            imageUrl = "https://example.com/assets/images/drinks/soda_selection.jpg",
+            imageRes = R.drawable.ic_drink_soda
         )
     )
 
@@ -778,7 +846,7 @@ object CheeseBiteRepository {
             id = "addr_2",
             label = "Office / Shop",
             fullAddress = "Shop 5, Main Commercial Market, Zafarwal Road",
-            landmark = "Opposite Allied Bank",
+            landmark = "Near Zafarwal Commercial Center",
             phone = "0320-9163877",
             isDefault = false
         )

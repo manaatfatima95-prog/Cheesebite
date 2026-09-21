@@ -61,8 +61,8 @@ fun SearchScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     val popularTags = listOf(
-        "Pizza Deal 02", "Zinger Burger", "Special Bite Pizza",
-        "Loaded Fries", "Malai Pizza", "Crown Crust", "Student Deal", "Cheese Kanafa"
+        "Pizza", "Zinger Burger", "Special Bite Pizza",
+        "Shawarma", "Loaded Fries", "Malai Tikka", "Deals", "Chilled Drinks"
     )
 
     Column(
@@ -208,8 +208,8 @@ fun SearchScreen(
             if (uiState.searchResults.isEmpty()) {
                 EmptyStateView(
                     icon = Icons.Default.SearchOff,
-                    title = "No dishes found",
-                    description = "We couldn't find anything matching '${uiState.searchQuery}'. Check your spelling or browse our menu deals.",
+                    title = "No matching items found",
+                    description = "We couldn't find anything matching '${uiState.searchQuery}'. Check your spelling or browse our menu categories.",
                     actionLabel = "Clear Search",
                     onActionClick = { viewModel.onSearchQueryChanged("") }
                 )

@@ -23,7 +23,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material.icons.filled.DeliveryDining
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Payments
@@ -86,8 +85,7 @@ fun CheckoutScreen(
     val paymentOptions = listOf(
         PaymentOption("cod", "Cash on Delivery (COD)", "Pay with cash when your food arrives", Icons.Default.Payments),
         PaymentOption("jazzcash", "JazzCash", "Transfer to 0320-9163877 (Cheese Bites)", Icons.Default.PhoneAndroid),
-        PaymentOption("easypaisa", "EasyPaisa", "Transfer to 0306-7526655 (Cheese Bites)", Icons.Default.PhoneAndroid),
-        PaymentOption("card", "Debit / Credit Card", "Visa & MasterCard supported", Icons.Default.CreditCard)
+        PaymentOption("easypaisa", "EasyPaisa", "Transfer to 0306-7526655 (Cheese Bites)", Icons.Default.PhoneAndroid)
     )
 
     Column(

@@ -1,0 +1,89 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Deep slate / charcoal backdrop -->
+    <path
+        android:fillColor="#111827"
+        android:pathData="M0,0h200v200h-200z" />
+
+    <!-- Ambient glow circle -->
+    <path
+        android:fillColor="#1F2937"
+        android:pathData="M100,100m-70,0a70,70 0 1,0 140,0a70,70 0 1,0 -140,0" />
+
+    <!-- Bottle 1: Coca-Cola 450ml Bottle -->
+    <path
+        android:fillColor="#DC2626"
+        android:pathData="M32,56h10v8h-10z" />
+    <path
+        android:fillColor="#7F1D1D"
+        android:pathData="M34,64 L39,64 L43,84 L30,84 Z" />
+    <path
+        android:fillColor="#991B1B"
+        android:pathData="M28,84 C28,84 26,90 26,98 L26,162 C26,166 30,169 36,169 C42,169 46,166 46,162 L46,98 C46,90 44,84 44,84 Z" />
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M26,110h20v18h-20z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M28,118 C32,122 38,116 44,120 L44,122 C38,118 32,124 28,120 Z" />
+
+    <!-- Bottle 2: Fanta Orange 440ml Bottle -->
+    <path
+        android:fillColor="#15803D"
+        android:pathData="M70,48h10v8h-10z" />
+    <path
+        android:fillColor="#C2410C"
+        android:pathData="M72,56 L77,56 L81,78 L68,78 Z" />
+    <path
+        android:fillColor="#EA580C"
+        android:pathData="M65,78 C65,78 63,85 63,94 L63,164 C63,168 67,171 74,171 C81,171 85,168 85,164 L85,94 C85,85 83,78 83,78 Z" />
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M63,108h22v16h-22z" />
+    <path
+        android:fillColor="#F97316"
+        android:pathData="M71,113m-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0" />
+
+    <!-- Bottle 3: Sprite 450ml Bottle -->
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M112,46h10v8h-10z" />
+    <path
+        android:fillColor="#047857"
+        android:pathData="M114,54 L119,54 L123,76 L110,76 Z" />
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M107,76 C107,76 105,83 105,92 L105,166 C105,170 109,173 116,173 C123,173 127,170 127,166 L127,92 C127,83 125,76 125,76 Z" />
+    <path
+        android:fillColor="#059669"
+        android:pathData="M105,108h22v16h-22z" />
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M114,113 L119,111 L117,117 L122,115 L115,123 L116,118 L112,120 Z" />
+
+    <!-- Bottle 4: Sparletta / Berry 440ml Bottle -->
+    <path
+        android:fillColor="#A21CAF"
+        android:pathData="M152,54h10v8h-10z" />
+    <path
+        android:fillColor="#831843"
+        android:pathData="M154,62 L159,62 L163,82 L150,82 Z" />
+    <path
+        android:fillColor="#BE185D"
+        android:pathData="M147,82 C147,82 145,88 145,96 L145,162 C145,166 149,169 156,169 C163,169 167,166 167,162 L167,96 C167,88 165,82 165,82 Z" />
+    <path
+        android:fillColor="#F43F5E"
+        android:pathData="M145,110h22v16h-22z" />
+
+    <!-- Chilled stars -->
+    <path
+        android:fillColor="#67E8F9"
+        android:pathData="M97,26 L99,31 L104,32 L99,34 L97,39 L95,34 L90,32 L95,31 Z" />
+    <path
+        android:fillColor="#FDE047"
+        android:pathData="M140,32 L142,36 L146,37 L142,39 L140,43 L138,39 L134,37 L138,36 Z" />
+</vector>

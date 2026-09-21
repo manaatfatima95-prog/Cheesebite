@@ -1,0 +1,55 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Background card gradient tone -->
+    <path
+        android:fillColor="#0D1B2A"
+        android:pathData="M0,0h200v200h-200z" />
+
+    <!-- Ambient glow circle -->
+    <path
+        android:fillColor="#1E3A5F"
+        android:pathData="M100,100m-70,0a70,70 0 1,0 140,0a70,70 0 1,0 -140,0" />
+
+    <!-- Soda cup / bottle body -->
+    <path
+        android:fillColor="#0284C7"
+        android:pathData="M70,75 L76,165 C76.5,170 81,174 86,174 L114,174 C119,174 123.5,170 124,165 L130,75 Z" />
+
+    <!-- Liquid highlight -->
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M78,85 L83,160 C83.5,163 86,166 89,166 L111,166 C114,166 116.5,163 117,160 L122,85 Z" />
+
+    <!-- Cup Lid -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M64,68 C64,65 67,62 71,62 L129,62 C133,62 136,65 136,68 L136,75 L64,75 Z" />
+
+    <!-- Straw -->
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M106,26 L114,26 L108,62 L100,62 Z" />
+    <path
+        android:fillColor="#DC2626"
+        android:pathData="M114,26 L132,18 L136,25 L118,33 Z" />
+
+    <!-- Ice cubes / bubbles -->
+    <path
+        android:fillColor="#BAE6FD"
+        android:pathData="M92,105 L102,102 L105,112 L95,115 Z" />
+    <path
+        android:fillColor="#E0F2FE"
+        android:pathData="M102,125m-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0" />
+    <path
+        android:fillColor="#E0F2FE"
+        android:pathData="M88,140m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0" />
+
+    <!-- Cold sparkles -->
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M142,50 L145,58 L153,61 L145,64 L142,72 L139,64 L131,61 L139,58 Z" />
+</vector>
